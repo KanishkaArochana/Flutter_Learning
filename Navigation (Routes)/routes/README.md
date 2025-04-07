@@ -148,4 +148,74 @@ class SecondScreen extends StatelessWidget {
 }
 ```
 
+### Widgets and Properties
+- **Text**: Displays the received text.
+- **Column**: Arranges widgets vertically.
+- **SizedBox**: Adds spacing.
+- **GestureDetector**:
+  - Detects taps.
+  - Calls `Navigator.pop()` to return to `MyHomePage`.
+- **Navigator.pop**:
+  - Removes the current screen from the stack.
+  - Returns `MyHomePage`.
+
+---
+## 🔄 Navigation Concepts
+
+### **1️⃣ Pushing a New Screen (`Navigator.push`)**
+- Adds a new screen to the navigation stack.
+- Uses `MaterialPageRoute` to define the screen transition.
+
+**Example:**
+```dart
+Navigator.of(context).push(
+  MaterialPageRoute(
+    builder: (context) {
+      return SecondScreen(text: "Kanishka");
+    },
+  ),
+);
+```
+
+### **2️⃣ Popping a Screen (`Navigator.pop`)**
+- Removes the current screen and returns to the previous screen.
+
+**Example:**
+```dart
+Navigator.pop(context);
+```
+
+### **3️⃣ Passing Data Between Screens**
+- **Passing Data:**
+  - Done via constructor parameters while pushing a new route.
+
+**Example:**
+```dart
+Navigator.of(context).push(
+  MaterialPageRoute(
+    builder: (context) {
+      return SecondScreen(text: "Hello");
+    },
+  ),
+);
+```
+
+- **Receiving Data:**
+  - Define a parameter in `SecondScreen` and use it inside `build`.
+
+**Example:**
+```dart
+class SecondScreen extends StatelessWidget {
+  final String text;
+  const SecondScreen({super.key, required this.text});
+}
+```
+
+---
+## Summary
+| Feature | Method |
+|---------|--------|
+| Navigate to new screen | `Navigator.push` |
+| Go back to previous screen | `Navigator.pop` |
+| Pass data to next screen | Constructor parameters |
 
