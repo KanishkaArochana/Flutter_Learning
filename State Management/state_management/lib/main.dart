@@ -61,3 +61,42 @@ class Screen2 extends StatelessWidget {
 }
 
 
+// Screen 3
+class Screen3 extends StatelessWidget {
+  Screen3({super.key, required this.name, required this.changeName});
+  String name; //Variable
+  Function changeName; //Function
+  @override
+  Widget build(BuildContext context) {
+    debugPrint("Building Screen3");
+    return Container(
+      child:
+          Screen4(name: name, changeName: changeName), //Pass the data Screen 4
+    );
+  }
+}
+
+// Screen 4
+class Screen4 extends StatelessWidget {
+  Screen4({super.key, required this.name, required this.changeName});
+  String name; //Variable
+  Function changeName; //Function
+  @override
+  Widget build(BuildContext context) {
+    debugPrint("Building Screen4");
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(name),
+          ElevatedButton(
+            onPressed: () {
+              changeName("Arochana");
+            },
+            child: Text("Change Data"),
+          )
+        ],
+      ),
+    );
+  }
+}
