@@ -47,3 +47,56 @@ class Screen2 extends StatelessWidget {
     );
   }
 }
+
+class Screen3 extends StatelessWidget {
+  Screen3({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    debugPrint('Building Screen3');
+    return Container(
+      child: Screen4(),
+    );
+  }
+}
+
+class Screen4 extends StatelessWidget {
+  Screen4({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    debugPrint('Building Screen4');
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Consumer<MyData>(
+            builder: (context, value, child) {
+              return Text(value.name);
+            },
+          ),
+          ElevatedButton(
+            onPressed: () {
+              //Provider.of<MyData>(context, listen: false).changeName("Pasindu");
+              context
+                  .read<MyData>()
+                  .changeName(Random().nextInt(100).toString());
+            },
+            child: Text('Change data'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+
+//Data change class
+class MyData extends ChangeNotifier {
+  String _name = "Sahan";
+
+  void changeName(String name) {
+    _name = name;  //_name --> private value
+    notifyListeners(); //Function in ChangeNotifier (same Set state)
+  }
+
+  String get name => _name; //Private value in return
+}
