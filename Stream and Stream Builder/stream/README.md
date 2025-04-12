@@ -96,3 +96,48 @@ void initState() {
   // Uncomment the method you want to use:
   // addStreamData(); // 1st Method
 }
+```
+- **🔄 `initState`**: Called when the widget is first created. The `addStreamData` method is optionally invoked here to start emitting stream data.
+
+```dart
+@override
+void dispose() {
+  _controller.close();
+  super.dispose();
+}
+```
+- **🗑️ `dispose`**: Cleans up resources (e.g., closes the StreamController) to prevent memory leaks.
+
+### 🎨 Building the UI
+```dart
+@override
+Widget build(BuildContext context) {
+  return MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(
+        title: Center(child: const Text("Stream & Stream Builder")),
+      ),
+      body: Center(
+        child: StreamBuilder<int>(
+          stream: addStreamData2()
+              .where((event) => event.isEven),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text("Error");
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator.adaptive();
+            }
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Stream Item"),
+                Text("${snapshot.data}"),
+              ],
+            );
+          },
+        ),
+      ),
+    ),
+  );
+}
+```
